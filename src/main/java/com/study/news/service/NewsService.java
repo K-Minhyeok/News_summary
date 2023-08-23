@@ -24,13 +24,22 @@ public class NewsService {
         String URL = "https://www.yna.co.kr/economy/all?site=navi_economy_depth02";
 
         Document doc = Jsoup.connect(URL).get();
-
-        doc.text();
-
-        Elements elem = doc.select("lead");
+        Elements elem = doc.select("div[class=\"news-con\"]");
 
 
-        System.out.println(elem);
+        int i=1;
+        for(Element e:elem.select("div[class=\"news-con\"]")){
+            System.out.print(i+" 제목: " + e.select("strong[class=\"tit-news\"]").text());
+            System.out.println("   || 내용 : "+e.select("p[class=\"lead\"]").text());
+            //e.text()를 DB에 넣기
+
+            i++;
+            //10개만 출력할 예정임
+            if(i==11){
+                break;
+            }
+        }
+
 
 
     }
