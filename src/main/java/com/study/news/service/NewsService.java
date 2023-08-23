@@ -27,20 +27,22 @@ public class NewsService {
         Elements elem = doc.select("div[class=\"news-con\"]");
 
 
-        int i=1;
-        for(Element e:elem.select("div[class=\"news-con\"]")){
-            System.out.print(i+" 제목: " + e.select("strong[class=\"tit-news\"]").text());
-            System.out.println("   || 내용 : "+e.select("p[class=\"lead\"]").text());
-            //e.text()를 DB에 넣기
+        int count=1;
 
-            i++;
-            //10개만 출력할 예정임
-            if(i==11){
+        for(Element e:elem.select("div[class=\"news-con\"]")){
+            System.out.print(count+" 제목: " + e.select("strong[class=\"tit-news\"]").text());
+            System.out.println("   || 내용 : "+e.select("p[class=\"lead\"]").text());
+
+            //e.text()를 DB에 넣기
+            news.setContent(e.select("p[class=\"lead\"]").text());
+            newsRepository.save(news);
+            count++;
+            //10개만 출력
+            if(count==11){
                 break;
             }
+
         }
-
-
 
     }
 
