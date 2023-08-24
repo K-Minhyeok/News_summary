@@ -21,7 +21,7 @@ public class NewsController {
 @PostMapping("news/result")
     public String resultOfNews(News news) throws  Exception{
 
-    newsService.addContToDB(news);
+    newsService.addContToDB();
 
     return "resultOfNews";
     }
